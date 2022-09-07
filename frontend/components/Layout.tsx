@@ -54,34 +54,34 @@ function Head() {
 
       {/* OG + Facebook */}
       <meta property="og:type" content="website" />
-      <meta property="og:url" content="https://faucet.paradigm.xyz" />
+      <meta property="og:url" content="https://palm-testnet-faucet.onrender.com/" />
       <meta
         property="og:title"
-        content="Paradigm MultiFaucet | Bootstrap your testnet wallet"
+        content="Palm Testnet Faucet"
       />
       <meta
         property="og:description"
-        content="MultiFaucet funds a wallet with ETH, wETH, DAI, and NFTs across 8 testnet networks, at once."
+        content="Palm Testnet faucet funds a wallet with PALM, wETH, DAI, and NFTs all at once"
       />
       <meta
         property="og:image"
-        content="https://faucet.paradigm.xyz/meta.png"
+        content="https://palm-testnet-faucet.onrender.com/Palm_Logo_RGB.svg"
       />
 
       {/* Twitter */}
       <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content="https://faucet.paradigm.xyz" />
+      <meta property="twitter:url" content="https://palm-testnet-faucet.onrender.com/" />
       <meta
         property="twitter:title"
-        content="Paradigm MultiFaucet | Bootstrap your testnet wallet"
+        content="Palm Testnet Faucet"
       />
       <meta
         property="twitter:description"
-        content="MultiFaucet funds a wallet with ETH, wETH, DAI, and NFTs across 8 testnet networks, at once."
+        content="Palm Testnet faucet funds a wallet with PALM, wETH, DAI, and NFTs all at once."
       />
       <meta
         property="twitter:image"
-        content="https://faucet.paradigm.xyz/meta.png"
+        content="https://palm-testnet-faucet.onrender.com/Palm_Logo_RGB.svg"
       />
     </HTMLHead>
   );
@@ -98,7 +98,7 @@ function Footer() {
         safety or correctness of the user interface or the smart contracts. They
         have not been audited and as such there can be no assurance they will
         work as intended, and users may experience delays, failures, errors,
-        omissions or loss of transmitted information. Paradigm is not liable for
+        omissions or loss of transmitted information. No liability for
         any of the foregoing. Users should proceed with caution and use at their
         own risk.
       </p>
