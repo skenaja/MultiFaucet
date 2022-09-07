@@ -3,12 +3,12 @@ import { ethers } from "ethers"; // Ethers
 import { WebClient } from "@slack/web-api"; // Slack
 import { isValidInput } from "pages/index"; // Address check
 import parseTwitterDate from "utils/dates"; // Parse Twitter dates
-import { getSession } from "next-auth/client"; // Session management
+import { getSession } from "next-auth/react"; // Session management
 import { hasClaimed } from "pages/api/claim/status"; // Claim status
 import type { NextApiRequest, NextApiResponse } from "next"; // Types
 
 // Setup whitelist (Anish)
-const whitelist: string[] = ["1078014622525988864"];
+const whitelist: string[] = ["319614908"];
 
 // Setup redis client
 const client = new Redis(process.env.REDIS_URL);
@@ -41,17 +41,20 @@ function generateAlchemy(partial: string): string {
 
 // Setup networks
 const ARBITRUM: number = 421611;
+//Palm Testnet	11297108099
+//Palm Mainnet	11297108109
 const mainRpcNetworks: Record<number, string> = {
+  11297108099: "https://palm-testnet.public.blastapi.io",
   //3: generateAlchemy("eth-ropsten.alchemyapi.io"),
-  4: generateAlchemy("eth-rinkeby.alchemyapi.io"),
-  5: generateAlchemy("eth-goerli.alchemyapi.io"),
-  42: generateAlchemy("eth-kovan.alchemyapi.io"),
+  // 4: generateAlchemy("eth-rinkeby.alchemyapi.io"),
+  // 5: generateAlchemy("eth-goerli.alchemyapi.io"),
+  // 42: generateAlchemy("eth-kovan.alchemyapi.io"),
 };
 const secondaryRpcNetworks: Record<number, string> = {
-  69: generateAlchemy("opt-kovan.g.alchemy.com"),
-  //1287: "https://rpc.api.moonbase.moonbeam.network",
-  80001: generateAlchemy("polygon-mumbai.g.alchemy.com"),
-  421611: generateAlchemy("arb-rinkeby.g.alchemy.com"),
+  // 69: generateAlchemy("opt-kovan.g.alchemy.com"),
+  // //1287: "https://rpc.api.moonbase.moonbeam.network",
+  // 80001: generateAlchemy("polygon-mumbai.g.alchemy.com"),
+  // 421611: generateAlchemy("arb-rinkeby.g.alchemy.com"),
   //43113: "https://api.avax-test.network/ext/bc/C/rpc",
 };
 
@@ -128,7 +131,7 @@ async function processDrip(
   // Collect nonce for network
   const nonce = await getNonceByNetwork(network);
   // Collect gas price * 2 for network
-  const gasPrice = (await provider.getGasPrice()).mul(2);
+  const gasPrice = (await provider.getGasPrice()).mul(1);
 
   // Update nonce for network in redis w/ 5m ttl
   await client.set(`nonce-${network}`, nonce + 1, "EX", 300);
@@ -147,7 +150,7 @@ async function processDrip(
     });
   } catch (e) {
     await postSlackMessage(
-      `@anish Error dripping for ${provider.network.chainId}, ${String(
+      `Error dripping for ${provider.network.chainId}, ${String(
         (e as any).reason
       )}`
     );
@@ -242,6 +245,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     ...otherNetworks,
   };
 
+  await postSlackMessage(`Dripping: ${data} for ${session.twitter_handle}`);
   // For each main network
   for (const networkId of Object.keys(claimNetworks)) {
     try {

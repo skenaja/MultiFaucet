@@ -1,5 +1,5 @@
 import Redis from "ioredis"; // Redis
-import { getSession } from "next-auth/client"; // Session management
+import { getSession } from "next-auth/react"; // Session management
 import type { NextApiRequest, NextApiResponse } from "next"; // Types
 
 // Setup redis client

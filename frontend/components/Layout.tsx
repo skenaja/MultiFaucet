@@ -38,17 +38,18 @@ function Head() {
       />
 
       {/* Favicon */}
-      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="shortcut icon" href="/favicon-32.png" />
 
       {/* Primary Meta Tags */}
-      <title>Paradigm MultiFaucet | Bootstrap your testnet wallet</title>
+      <title>Palm Testnet Faucet
+      </title>
       <meta
         name="title"
-        content="Paradigm MultiFaucet | Bootstrap your testnet wallet"
+        content="Palm Testnet Faucet"
       />
       <meta
         name="description"
-        content="MultiFaucet funds a wallet with ETH, wETH, DAI, and NFTs across 8 testnet networks, at once."
+        content="Palm Testnet faucet funds a wallet with PALM, wETH, DAI, and NFTs all at once"
       />
 
       {/* OG + Facebook */}

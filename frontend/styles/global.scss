@@ -1,6 +1,6 @@
 // Background colors
-$bg-color: rgb(246, 246, 247);
-$bg-dot-color: rgb(203, 203, 205);
+$bg-color: rgb(255, 255, 255);
+$bg-dot-color: rgb(255, 255, 255);
 
 // Background dimensions
 $dot-size: 2px;
@@ -19,12 +19,14 @@ body {
   // Font
   font-feature-settings: "ss01";
   text-rendering: optimizeLegibility;
-  font-family: "Inter", sans-serif;
+  font-family: "Whyte Book", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
 
   // Background
   min-height: 100vh;
   min-width: 100vw;
-  background-color: rgb(246, 246, 247);
+  background-color: rgb(255, 255, 255);
   background: linear-gradient(
         90deg,
         $bg-color ($dot-space - $dot-size),
@@ -41,5 +43,5 @@ input {
   // Font override
   font-feature-settings: "ss01";
   text-rendering: optimizeLegibility;
-  font-family: "Inter", sans-serif;
+  font-family: "Whyte Inktrap Medium", sans-serif;
 }

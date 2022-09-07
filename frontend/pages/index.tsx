@@ -8,7 +8,7 @@ import styles from "styles/Home.module.scss"; // Styles
 import { ReactElement, useState } from "react"; // Local state + types
 import { getAddressDetails } from "utils/addresses"; // Faucet addresses
 import { hasClaimed } from "pages/api/claim/status"; // Claim status
-import { signIn, getSession, signOut } from "next-auth/client"; // Auth
+import { signIn, getSession, signOut } from "next-auth/react"; // Auth
 
 /**
  * Check if a provided address is valid
@@ -100,22 +100,20 @@ export default function Home({
       <div className={styles.home__cta}>
         <div>
           <a
-            href="https://paradigm.xyz"
+            href="https://palm.io"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image src="/logo.svg" height="42.88px" width="180px" />
+            <Image src="/Palm_Logo_RGB.svg" height="100px" width="300px" />
           </a>
         </div>
-        <h1>Bootstrap your testnet wallet</h1>
+        <h1>Palm testnet faucet</h1>
         <span>
-          MultiFaucet funds a wallet with{" "}
-          <TokenLogo name="ETH" imageSrc="/tokens/eth.png" />
-          , <TokenLogo name="wETH" imageSrc="/tokens/weth.png" />,
-          <TokenLogo name="DAI" imageSrc="/tokens/dai.svg" />, and{" "}
-          <TokenLogo name="NFTs" imageSrc="/tokens/punks.png" /> across{" "}
-          {`${networkCount} `}
-          testnet networks, at once.
+          Add these tokens to your wallet: {" "}
+          <TokenLogo name="PALM" imageSrc="/tokens/palm.png" />{" "}
+          <TokenLogo name="wETH" imageSrc="/tokens/weth.png" />{" "}
+          <TokenLogo name="DAI" imageSrc="/tokens/dai.svg" />{" "}
+          <TokenLogo name="ECR-721 NFT" imageSrc="/tokens/logo128.png" />{" "}
         </span>
       </div>
 
@@ -188,7 +186,7 @@ export default function Home({
                     onChange={(e) => setAddress(e.target.value)}
                   />
 
-                  {/* Other networks checkbox */}
+                  {/* Other networks checkbox 
                   <div className={styles.content__unclaimed_others}>
                     <input
                       type="checkbox"
@@ -200,7 +198,7 @@ export default function Home({
                       Kovan, and Görli)
                     </label>
                   </div>
-
+                  */}
                   {isValidInput(address) ? (
                     // If address is valid, allow claiming
                     <button
@@ -246,11 +244,6 @@ export default function Home({
             <p>
               Your Twitter account must have at least 1 Tweet, 15 followers, and
               be older than 1 month.
-            </p>
-            <p className={styles.home__card_content_section_lh}>
-              By default, the faucet drips on the Ethereum testnets (Rinkeby,
-              Ropsten, Kovan, Görli). You can choose to receive a drip on other
-              networks when requesting tokens.
             </p>
             <p>You can claim from the faucet once every 24 hours.</p>
           </div>

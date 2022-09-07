@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 /// ============ Imports ============
 
-import "./interfaces/IERC20.sol"; // ERC20 minified interface
+import "./IERC20.sol"; // ERC20 minified interface
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol"; // OZ: ERC721
 
 /// @title MultiFaucet

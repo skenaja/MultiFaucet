@@ -6,36 +6,22 @@ MultiFaucet is a simple [faucet](https://en.wikipedia.org/wiki/History_of_bitcoi
 
 It enables a super operator to `drip` and `drain` to a recipient, add approved operators, or update the super operator. Approved operators can only `drip` to a recipient.
 
+This is a forked hardhat version of [MultiFaucet](https://github.com/anish-agnihotri/MultiFaucet) specifically for Palm Testnet
+
+
 ## Build and Test
 
 ```bash
-# Collect repo
-git clone https://github.com/anish-agnihotri/MultiFaucet
+# download repo
+git clone https://github.com/skenaja/MultiFaucet
 cd MultiFaucet/contracts
 
-# Run tests
-make
-make test
-```
+# build contracts
+yarn
+npx hardhat compile
 
-## Installing the toolkit
-
-If you do not have DappTools already installed, you'll need to run the commands below:
-
-### Install Nix
-
-```bash
-# User must be in sudoers
-curl -L https://nixos.org/nix/install | sh
-
-# Run this or login again to use Nix
-. "$HOME/.nix-profile/etc/profile.d/nix.sh"
-```
-
-### Install DappTools
-
-```bash
-curl https://dapp.tools/install | sh
+# deploy
+npx hardhat run scripts/1_deploy.js 
 ```
 
 ## License
@@ -46,3 +32,4 @@ curl https://dapp.tools/install | sh
 
 - [@gakonst/lootloose](https://github.com/gakonst/lootloose) for DappTools info
 - ds-test, OpenZeppelin for inherited libraries
+- https://github.com/Anish-Agnihotri/MultiFaucet
