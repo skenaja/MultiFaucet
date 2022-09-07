@@ -1,12 +1,13 @@
 import NextAuth from "next-auth"; // Next auth
-import Providers from "next-auth/providers"; // Twitter provider
+import TwitterProvider from "next-auth/providers/twitter"; // Twitter provider
 
 export default NextAuth({
   providers: [
     // Twitter OAuth provider
-    Providers.Twitter({
-      clientId: process.env.TWITTER_CLIENT_ID,
-      clientSecret: process.env.TWITTER_CLIENT_SECRET,
+    TwitterProvider({
+      clientId: process.env.TWITTER_CLIENT_ID!,
+      clientSecret: process.env.TWITTER_CLIENT_SECRET!,
+      // version: "2.0",
     }),
   ],
   // Custom page:
@@ -16,7 +17,7 @@ export default NextAuth({
   },
   // Use JWT
   session: {
-    jwt: true,
+    strategy: "jwt",
     // 30 day expiry
     maxAge: 30 * 24 * 60 * 60,
     // Refresh JWT on each login
@@ -28,14 +29,18 @@ export default NextAuth({
   },
   callbacks: {
     // On signin + signout
-    jwt: async (token, user, account, profile) => {
+    async jwt({token, user, account, profile}) {
       // Check if user is signing in (versus logging out)
       const isSignIn = user ? true : false;
 
       // If signing in
       if (isSignIn) {
         // Attach additional parameters (twitter id + handle + anti-bot measures)
-        token.twitter_id = account?.id;
+        console.log("jwt-token:",token);
+        console.log("jwt-user:",user);
+        console.log("jwt-account",account);
+        console.log("jwt-profile",profile);
+        token.twitter_id = account?.providerAccountId;
         token.twitter_handle = profile?.screen_name;
         token.twitter_num_tweets = profile?.statuses_count;
         token.twitter_num_followers = profile?.followers_count;
@@ -44,18 +49,22 @@ export default NextAuth({
 
       // Resolve JWT
       return Promise.resolve(token);
-    },
-    // On session retrieval
-    session: async (session, user) => {
-      // Attach additional params from JWT to session
-      session.twitter_id = user.twitter_id;
-      session.twitter_handle = user.twitter_handle;
-      session.twitter_num_tweets = user.twitter_num_tweets;
-      session.twitter_num_followers = user.twitter_num_followers;
-      session.twitter_created_at = user.twitter_created_at;
-
-      // Resolve session
-      return Promise.resolve(session);
-    },
+      },
+      // On session retrieval
+      async session({session, token, user})  {
+        // Attach additional params from JWT to session
+        console.log("session-session",session);
+        console.log("session-token:",token);
+        console.log("session-user:",user);
+        session.twitter_id = token.twitter_id;
+        session.twitter_handle = token.twitter_handle;
+        session.twitter_num_tweets = token.twitter_num_tweets;
+        session.twitter_num_followers = token.twitter_num_followers;
+        session.twitter_created_at = token.twitter_created_at;
+        console.log("session-session",session);
+        
+        // Resolve session
+        return Promise.resolve(session);
+      },
   },
 });
