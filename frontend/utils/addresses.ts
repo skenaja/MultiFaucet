@@ -35,16 +35,27 @@ export const ADDRESSES = [
   //     DAI: "0x6A9865aDE2B6207dAAC49f8bCba9705dEB0B0e6D",
   //   },
   // },
-  // {
-  //   network: "goerli",
-  //   disclaimer: "Faucet drips 1 ETH, 1 wETH, and 5 NFTs (ERC721).",
-  //   etherscanPrefix: "goerli.etherscan.io",
-  //   formattedName: "Görli",
-  //   addresses: {
-  //     NFTs: "0xf5de760f2e916647fd766b4ad9e85ff943ce3a2b",
-  //     wETH: "0xb4fbf271143f4fbf7b91a5ded31805e42b2208d6",
-  //   },
-  // },
+  {
+    network: "goerli",
+    disclaimer: "Faucet drips 1 DAI",
+    etherscanPrefix: "goerli.etherscan.io",
+    formattedName: "Görli",
+    connectionDetails: "https://goerli.net/#about",
+    autoconnect: {
+      chainId: "0x5",
+      chainName: "Ethereum Testnet Görli",
+      nativeCurrency: {
+        name: "Görli Ether",
+        symbol: "ETH",
+        decimals: 18,
+      },
+      rpcUrls: ["https://goerli.public.blastapi.io"],
+      blockExplorerUrls: ["https://goerli.etherscan.io"],
+    },
+    addresses: {
+      DAI: "0x4CD23DB013fa3A692c2d59E2baea7887Fcf59EC0",
+    },
+  },
 ];
 
 /**

@@ -47,7 +47,7 @@ const mainRpcNetworks: Record<number, string> = {
   11297108099: "https://palm-testnet.public.blastapi.io",
   //3: generateAlchemy("eth-ropsten.alchemyapi.io"),
   // 4: generateAlchemy("eth-rinkeby.alchemyapi.io"),
-  // 5: generateAlchemy("eth-goerli.alchemyapi.io"),
+  5: generateAlchemy("eth-goerli.alchemyapi.io"),
   // 42: generateAlchemy("eth-kovan.alchemyapi.io"),
 };
 const secondaryRpcNetworks: Record<number, string> = {
@@ -133,13 +133,20 @@ async function processDrip(
   // Collect gas price * 2 for network
   const gasPrice = (await provider.getGasPrice()).mul(1);
 
+  let contract = "";
+  if (network == 5) 
+    { contract = "0x2715dd5a4920b46Db6D5A32F5FD735Ac68d4c8EE" }
+  else if (network == 11297108099)
+    { contract = "0xBA86F78747788ab119Adb899bBb552Ae93E5E1fA" } 
+  console.log("Contract: ",contract);
+
   // Update nonce for network in redis w/ 5m ttl
   await client.set(`nonce-${network}`, nonce + 1, "EX", 300);
 
   // Return populated transaction
   try {
     await rpcWallet.sendTransaction({
-      to: process.env.FAUCET_ADDRESS ?? "",
+      to: contract ?? "",
       from: wallet.address,
       gasPrice,
       // Custom gas override for Arbitrum w/ min gas limit
@@ -245,12 +252,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     ...otherNetworks,
   };
 
-  await postSlackMessage(`Dripping: ${data} for ${session.twitter_handle}`);
+
   // For each main network
   for (const networkId of Object.keys(claimNetworks)) {
     try {
       // Process faucet claims
       await processDrip(wallet, Number(networkId), data);
+      await postSlackMessage(`Dripping: ${data} for ${session.twitter_handle} on ${networkId}`);
     } catch (e) {
       // If not whitelisted, force user to wait 15 minutes
       if (!whitelist.includes(session.twitter_id)) {
