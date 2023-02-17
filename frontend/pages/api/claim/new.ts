@@ -10,6 +10,12 @@ import type { NextApiRequest, NextApiResponse } from "next"; // Types
 // Setup whitelist (Anish)
 const whitelist: string[] = ["319614908"];
 
+const denylist: string[] = [
+  "0x2022961ef4f5085D978128C054E675bEcBbdf738", 
+  "0xd55D8A862Ccf147c1E90f4F42C78F098534dDb5B", 
+  "0xDEdcE55ecE04795CaE0BccabD548b6a63Fa0Cbda",
+];
+
 // Setup redis client
 const client = new Redis(process.env.REDIS_URL);
 
@@ -202,7 +208,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       .send({ error: "Twitter account does not pass anti-bot checks." });
   }
 
-  if (!address || !isValidInput(address)) {
+  const bannedAccount = denylist.findIndex( addr =>  address.toLowerCase() === addr.toLowerCase());
+  if (!address || !isValidInput(address) || bannedAccount >= 0) {
     // Return invalid address status
     return res.status(400).send({ error: "Invalid address." });
   }
