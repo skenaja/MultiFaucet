@@ -14,7 +14,7 @@
     "@slack/web-api": "^6.5.1",
     "axios": "^0.24.0",
     "ethers": "^5.7.0",
-    "ioredis": "^4.28.5",
+    "ioredis": "^5.3.1",
     "next": "^12.2.5",
     "next-auth": "^4.10.3",
     "react": "17.0.2",
@@ -24,7 +24,7 @@
     "sass": "^1.42.1"
   },
   "devDependencies": {
-    "@types/ioredis": "^4.27.7",
+    "@types/ioredis": "^5.0.0",
     "@types/react": "17.0.26",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
