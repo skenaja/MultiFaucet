@@ -104,7 +104,7 @@ export default function Home({
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image src="/Palm_Logo_RGB.svg" height="100px" width="300px" />
+            <Image src="/Palm_Logo_RGB.svg" height="100px" width="300px" alt="Palm logo"/>
           </a>
         </div>
         <h1>Palm testnet faucet</h1>
@@ -404,7 +404,7 @@ function TokenLogo({
 }): ReactElement {
   return (
     <div className={styles.token}>
-      <img src={imageSrc} alt={`${name}`} />
+      <Image src={imageSrc} alt={`${name}`} width="18px" height="18px" />
       <span>{name}</span>
     </div>
   );
