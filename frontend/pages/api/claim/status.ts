@@ -3,7 +3,8 @@ import { getSession } from "next-auth/react"; // Session management
 import type { NextApiRequest, NextApiResponse } from "next"; // Types
 
 // Setup redis client
-const client = new Redis(process.env.REDIS_URL);
+const redisURL: string = process.env.REDIS_URL ?? "";
+const client = new Redis(redisURL);
 
 /**
  * Checks if a twitter id has claimed from faucet in last 24h
