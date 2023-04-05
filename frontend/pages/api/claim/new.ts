@@ -16,8 +16,9 @@ const denylist: string[] = [
   "0xDEdcE55ecE04795CaE0BccabD548b6a63Fa0Cbda",
 ];
 
+const redisURL: string = process.env.REDIS_URL ?? "";
 // Setup redis client
-const client = new Redis(process.env.REDIS_URL);
+const client = new Redis(redisURL);
 
 // Setup slack client
 const slack = new WebClient(process.env.SLACK_ACCESS_TOKEN);
