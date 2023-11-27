@@ -8,7 +8,20 @@ import { hasClaimed } from "pages/api/claim/status"; // Claim status
 import type { NextApiRequest, NextApiResponse } from "next"; // Types
 
 // Setup whitelist (Anish)
-const whitelist: string[] = ["319614908"];
+/*
+lerdiedabirdie. 1074017269439758337
+iconoclasticoon 1142920167070076929
+criptoalcoatl 1311466861003972609
+flaviatropia 22722686
+*/
+
+const whitelist: string[] = [
+  "319614908", // bors___
+  "1074017269439758337", 
+  "1142920167070076929",
+  "1311466861003972609",
+  "22722686"
+];
 
 const denylist: string[] = [
   "0x2022961ef4f5085D978128C054E675bEcBbdf738", 
